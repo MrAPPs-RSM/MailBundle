@@ -13,6 +13,14 @@
         "MIT"
     ],
     "require" : {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.3.*",
+        "sonata-project/core-bundle": "dev-master",
+        "sonata-project/jquery-bundle": "1.10.*@dev",
+        "sonata-project/admin-bundle": "2.3.*@dev",
+        "sonata-project/datagrid-bundle": "2.2.*@dev",
+        "sonata-project/user-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.3.*@dev"
     },
     "autoload" : {
         "psr-0" : {

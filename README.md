@@ -12,11 +12,9 @@ Funzionalità varie per l'invio e verifica delle email.
 
 ## Configurazione
 
-mrapps_mail:
-
-    general:
-
-        manager_type: orm   #orm o mongodb
+    mrapps_mail:
+        general:
+            manager_type: orm   #orm o mongodb
 
 
 ## Uso

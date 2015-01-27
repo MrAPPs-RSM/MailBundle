@@ -1,0 +1,30 @@
+{
+    "name" : "mrapps/mailbundle",
+    "description" : "Mr.APPs Mailer Bundle",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Mr.APPs srl",
+        "email" : "info@mr-apps.com"
+    }],
+    "keywords" : [
+        "mrapps mail mailer bundle"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Mrapps\\MailBundle" : ""
+        }
+    },
+    "target-dir" : "Mrapps/MailBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "0.1-dev"
+        }
+    }
+}

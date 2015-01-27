@@ -19,7 +19,8 @@ Funzionalità varie per l'invio e verifica delle email.
 
 ## Uso
 
-1. verify_mail:
+*verify_mail*
+
 Impostare l'url come subscription nei topic di Amazon SNS configurati per ricevere le notifiche da Amazon SES.
 Per ogni indirizzo email viene creata una riga di log (LogVerifica) con lo stato di quello specifico indirizzo (delivery o bounce).
 Se l'indirizzo email non è valido (bounce) l'utente viene disabilitato in automatico (o eliminato direttamente se si è appena registrato con un'email non valida).

@@ -9,13 +9,13 @@ Funzionalità varie per l'invio e verifica delle email.
 3. Aggiornare il file app/AppKernel.php: `new Mrapps\MailBundle\MrappsMailBundle()`
 4. Configurare le rotte:
 
-`mrapps_mailer:
+`mrapps_mailer:`
 
-    resource: "@MrappsMailBundle/Controller/"
+`resource: "@MrappsMailBundle/Controller/"`
 
-    type:     annotation
+`type:     annotation`
 
-    prefix:   /`
+`prefix:   /`
 
 ## Uso
 

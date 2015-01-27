@@ -13,8 +13,8 @@
         "MIT"
     ],
     "require" : {
-        "php": ">=5.3.3",
-        "symfony/symfony": ">=2.3.*",
+        "php": ">=5.3",
+        "symfony/symfony": ">=2.3",
         "sonata-project/core-bundle": ">=0.1",
         "sonata-project/jquery-bundle": ">=0.1",
         "sonata-project/admin-bundle": ">=0.1",

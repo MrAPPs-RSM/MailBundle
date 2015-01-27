@@ -54,6 +54,24 @@ class MailController extends Controller
         $typeRequest = trim($request->get('type'));
         if(strlen($typeRequest) > 0) $type = strtolower($typeRequest);
         
+        //Conferma sottoscrizione
+        if($type == 'subscriptionconfirmation') {
+            
+                $response = null;
+                $ch = curl_init();
+                if ($ch) {
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_URL, $sns['SubscribeURL']);
+                    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+                }
+                return new Response($response);
+            
+        }
+        
+        //Notifica
         if($type == 'notification') {
             
             $message = json_decode($sns['Message'], true);
@@ -125,5 +143,4 @@ class MailController extends Controller
         
         return new Response(null, 204, array('Content-Length' => 0, 'Content-Type' => 'text/html'));
     }
-    
 }

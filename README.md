@@ -10,6 +10,14 @@ Funzionalità varie per l'invio e verifica delle email.
 4. Configurare le rotte nel file `app/config/routing.yml`
 5. Aggiornare lo schema: `app/console doctrine:schema:update --force`
 
+## Configurazione
+
+mrapps_mail:
+
+    general:
+
+        manager_type: orm   #orm o mongodb
+
 
 ## Uso
 

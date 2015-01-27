@@ -18,7 +18,6 @@
         "sonata-project/core-bundle": ">=2.0",
         "sonata-project/jquery-bundle": ">=1.9",
         "sonata-project/admin-bundle": ">=2.0",
-        "sonata-project/datagrid-bundle": ">=2.0",
         "sonata-project/user-bundle": ">=2.0",
         "sonata-project/doctrine-orm-admin-bundle": ">=2.0"
     },

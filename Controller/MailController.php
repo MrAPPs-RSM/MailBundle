@@ -84,7 +84,7 @@ class MailController extends Controller
             if(strlen($notificationType) > 0) {
                 
                 //Indirizzo e-mail
-                $email = '';
+                $email = trim($request->get('mail_destination'));
                 if(isset($message['mail']['destination']) && is_array($message['mail']['destination'])) {
                     foreach ($message['mail']['destination'] as $addr) {
                         $email = strtolower(trim($addr));

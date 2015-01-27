@@ -4,13 +4,17 @@ Funzionalità varie per l'invio e verifica delle email.
 
 ## Installazione
 
-1. Specificare il bundle nel composer.json: `mrapps/mailbundle": "dev-master`
+1. Specificare il bundle nel composer.json: `"mrapps/mailbundle": "dev-master"`
 2. Aggiornare il composer: `php composer.phar update`
 3. Aggiornare il file app/AppKernel.php: `new Mrapps\MailBundle\MrappsMailBundle()`
 4. Configurare le rotte:
+
 `mrapps_mailer:
+
     resource: "@MrappsMailBundle/Controller/"
+
     type:     annotation
+
     prefix:   /`
 
 ## Uso

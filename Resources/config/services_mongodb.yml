@@ -1,0 +1,6 @@
+services:
+    mrapps_mail.admin.log_verifica:
+        class: Mrapps\MailBundle\Admin\LogVerificaAdmin
+        arguments: [~, Mrapps\MailBundle\Document\LogVerifica, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: doctrine_mongodb, group: MrappsMail, label: LogVerifica}

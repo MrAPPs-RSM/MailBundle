@@ -101,18 +101,28 @@ class MailController extends Controller
                             
                             foreach ($users as $user) {
                                 
-                                //Utente disabilitato e ConfirmationToken valorizzato e PasswordRequestedAt non valorizzato -> utente appena registrato
-                                if((!$user->isEnabled()) && (strlen(trim($user->getConfirmationToken())) > 0) && is_null($user->getPasswordRequestedAt())) {
+                                if(is_null($user->getFacebookUid())) {
                                     
-                                    //Eliminazione utente
-                                    $em->remove($user);
+                                    //Utente disabilitato e ConfirmationToken valorizzato e PasswordRequestedAt non valorizzato -> utente appena registrato
+                                    if((!$user->isEnabled()) && (strlen(trim($user->getConfirmationToken())) > 0) && is_null($user->getPasswordRequestedAt())) {
+
+                                        //Eliminazione utente
+                                        $em->remove($user);
+
+                                    }else {
+
+                                        //Disabilito l'utente
+                                        $user->setEnabled(false);
+                                        $em->persist($user);
+                                    }
                                     
                                 }else {
-                                    
-                                    //Disabilito l'utente
-                                    $user->setEnabled(false);
+                                    //Utente Facebook -> rimuovo i campi email
+                                    $user->setEmail('');
+                                    $user->setEmailCanonical('');
                                     $em->persist($user);
                                 }
+                                
                             }
                             
                             $em->flush();

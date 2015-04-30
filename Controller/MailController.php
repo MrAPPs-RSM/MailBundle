@@ -76,6 +76,7 @@ class MailController extends Controller
             
             $message = json_decode($sns['Message'], true);
             
+            $bounceType = '';
             $notificationType = trim($request->get('notification_type'));
             if(strlen($notificationType) == 0) {
                 $notificationType = (isset($message['notificationType'])) ? strtolower(trim($message['notificationType'])) : '';
@@ -97,35 +98,43 @@ class MailController extends Controller
                     switch($notificationType) {
                         case 'bounce':
                             
-                            $users = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('emailCanonical' => $email));
+                            //Tipo di bounce: permanent = hard bounce
+                            $bounceType = (isset($message['bounce']) && isset($message['bounce']['bounceType'])) ? strtolower(trim($message['bounce']['bounceType'])) : '';
                             
-                            foreach ($users as $user) {
+                            //Disabilita l'utente solo in caso di hardbounce (indirizzo email inesistente) e non in caso di softbounce (server temporaneamente non raggiungibile o altro)
+                            if($bounceType == 'permanent') {
                                 
-                                if(is_null($user->getFacebookUid())) {
-                                    
-                                    //Utente disabilitato e ConfirmationToken valorizzato e PasswordRequestedAt non valorizzato -> utente appena registrato
-                                    if((!$user->isEnabled()) && (strlen(trim($user->getConfirmationToken())) > 0) && is_null($user->getPasswordRequestedAt())) {
+                                $users = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('emailCanonical' => $email));
+                            
+                                foreach ($users as $user) {
 
-                                        //Eliminazione utente
-                                        $em->remove($user);
+                                    if(is_null($user->getFacebookUid())) {
+
+                                        //Utente disabilitato e ConfirmationToken valorizzato e PasswordRequestedAt non valorizzato -> utente appena registrato
+                                        if((!$user->isEnabled()) && (strlen(trim($user->getConfirmationToken())) > 0) && is_null($user->getPasswordRequestedAt())) {
+
+                                            //Eliminazione utente
+                                            $em->remove($user);
+
+                                        }else {
+
+                                            //Disabilito l'utente
+                                            $user->setEnabled(false);
+                                            $em->persist($user);
+                                        }
 
                                     }else {
-
-                                        //Disabilito l'utente
-                                        $user->setEnabled(false);
+                                        //Utente Facebook -> rimuovo i campi email
+                                        $user->setEmail('');
+                                        $user->setEmailCanonical('');
                                         $em->persist($user);
                                     }
-                                    
-                                }else {
-                                    //Utente Facebook -> rimuovo i campi email
-                                    $user->setEmail('');
-                                    $user->setEmailCanonical('');
-                                    $em->persist($user);
+
                                 }
+
+                                $em->flush();
                                 
                             }
-                            
-                            $em->flush();
 
                             break;
                         case 'delivery':
@@ -155,6 +164,7 @@ class MailController extends Controller
                     $log->setCreatedAt($now);
                     $log->setEmail($email);
                     $log->setTipo($notificationType);
+                    $log->setTipoBounce($bounceType);
                     
                     $em->persist($log);
                     $em->flush();

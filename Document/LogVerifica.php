@@ -17,6 +17,9 @@ class LogVerifica
     /** @MongoDB\Field(type="string") */
     protected $tipo;
     
+    /** @MongoDB\Field(type="string") */
+    protected $tipo_bounce;
+    
     /** @MongoDB\Field(type="date") @MongoDB\Index(order="asc") */
     protected $created_at;
     
@@ -73,6 +76,28 @@ class LogVerifica
     public function getTipo()
     {
         return $this->tipo;
+    }
+    
+    /**
+     * Set tipo_bounce
+     *
+     * @param string $tipo_bounce
+     * @return self
+     */
+    public function setTipoBounce($tipo_bounce)
+    {
+        $this->tipo_bounce = $tipo_bounce;
+        return $this;
+    }
+
+    /**
+     * Get tipo_bounce
+     *
+     * @return string $tipo_bounce
+     */
+    public function getTipoBounce()
+    {
+        return $this->tipo_bounce;
     }
 
     /**

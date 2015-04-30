@@ -36,6 +36,13 @@ class LogVerifica
     protected $tipo;
     
     /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo_bounce", type="string", length=1000, nullable=true)
+     */
+    protected $tipoBounce;
+    
+    /**
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     protected $createdAt;
@@ -96,6 +103,29 @@ class LogVerifica
     public function getTipo()
     {
         return $this->tipo;
+    }
+    
+    /**
+     * Set tipo_bounce
+     *
+     * @param string $tipo_bounce
+     * @return LogVerifica
+     */
+    public function setTipoBounce($tipo_bounce)
+    {
+        $this->tipo_bounce = $tipo_bounce;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipo_bounce
+     *
+     * @return string 
+     */
+    public function getTipoBounce()
+    {
+        return $this->tipo_bounce;
     }
 
     /**

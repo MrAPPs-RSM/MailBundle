@@ -128,6 +128,18 @@ class MailController extends Controller
                             $em->flush();
 
                             break;
+                        case 'delivery':
+                            
+                            $users = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('emailCanonical' => $email));
+                            
+                            foreach ($users as $user) {
+                                $user->setEnabled(true);
+                                $em->persist($user);
+                            }
+                            
+                            $em->flush();
+                            
+                            break;
                     }
                     
                     //Log verifica

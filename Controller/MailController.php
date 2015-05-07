@@ -116,19 +116,19 @@ class MailController extends Controller
                                             //Eliminazione utente
                                             $em->remove($user);
 
-                                        }else {
+                                        }/*else {
 
                                             //Disabilito l'utente
                                             $user->setEnabled(false);
                                             $em->persist($user);
-                                        }
+                                        }*/
 
-                                    }else {
+                                    }/*else {
                                         //Utente Facebook -> rimuovo i campi email
                                         $user->setEmail('');
                                         $user->setEmailCanonical('');
                                         $em->persist($user);
-                                    }
+                                    }*/
 
                                 }
 
@@ -139,14 +139,14 @@ class MailController extends Controller
                             break;
                         case 'delivery':
                             
-                            $users = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('emailCanonical' => $email));
-                            
-                            foreach ($users as $user) {
-                                $user->setEnabled(true);
-                                $em->persist($user);
-                            }
-                            
-                            $em->flush();
+//                            $users = $em->getRepository('ApplicationSonataUserBundle:User')->findBy(array('emailCanonical' => $email));
+//                            
+//                            foreach ($users as $user) {
+//                                $user->setEnabled(true);
+//                                $em->persist($user);
+//                            }
+//                            
+//                            $em->flush();
                             
                             break;
                     }
